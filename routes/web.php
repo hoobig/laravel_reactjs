@@ -12,5 +12,3 @@
 */
 
 Route::get('/{slug}', function($path = null){ return view('welcome'); })->where('slug', '(?!api)([A-z\d-\/_.]+)?');
-/*ANS848 - TriVH - add route for Item*/
-Route::resource('items', 'ItemController');

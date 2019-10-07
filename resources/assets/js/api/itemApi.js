@@ -1,8 +1,8 @@
-import axios from '../axios';
+import axiosClient from '../axiosClient';
 
 export async function createItem(item) {
     try {
-        return await axios.post('items', item);
+        return await axiosClient.post('items', item);
     }
     catch (e) {
         return null;
@@ -11,7 +11,7 @@ export async function createItem(item) {
 
 export async function displayItems() {
     try {
-        return await axios.get('items');
+        return await axiosClient.get('items');
     }
     catch (e) {
         return null;
@@ -20,7 +20,7 @@ export async function displayItems() {
 
 export async function referItemById(itemId) {
     try {
-        return await axios.get('items/' + itemId + '/edit');
+        return await axiosClient.get('items/' + itemId + '/edit');
     }
     catch (e) {
         return null;
@@ -29,7 +29,7 @@ export async function referItemById(itemId) {
 
 export async function editItemById(itemId, item) {
     try {
-        return await axios.patch('items/' + itemId, item);
+        return await axiosClient.patch('items/' + itemId, item);
     }
     catch (e) {
         return null;
@@ -38,7 +38,7 @@ export async function editItemById(itemId, item) {
 
 export async function deleteItemById(itemId) {
     try {
-        return await axios.delete('items/' + itemId);
+        return await axiosClient.delete('items/' + itemId);
     }
     catch (e) {
         return null;

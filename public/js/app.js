@@ -6143,7 +6143,7 @@ module.exports = exports['default'];
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return deleteItemById; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(298);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__axios__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__axiosClient__ = __webpack_require__(301);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -6158,7 +6158,7 @@ var createItem = function () {
                     case 0:
                         _context.prev = 0;
                         _context.next = 3;
-                        return __WEBPACK_IMPORTED_MODULE_1__axios__["a" /* default */].post('items', item);
+                        return __WEBPACK_IMPORTED_MODULE_1__axiosClient__["a" /* default */].post('items', item);
 
                     case 3:
                         return _context.abrupt('return', _context.sent);
@@ -6189,7 +6189,7 @@ var displayItems = function () {
                     case 0:
                         _context2.prev = 0;
                         _context2.next = 3;
-                        return __WEBPACK_IMPORTED_MODULE_1__axios__["a" /* default */].get('items');
+                        return __WEBPACK_IMPORTED_MODULE_1__axiosClient__["a" /* default */].get('items');
 
                     case 3:
                         return _context2.abrupt('return', _context2.sent);
@@ -6220,7 +6220,7 @@ var referItemById = function () {
                     case 0:
                         _context3.prev = 0;
                         _context3.next = 3;
-                        return __WEBPACK_IMPORTED_MODULE_1__axios__["a" /* default */].get('items/' + itemId + '/edit');
+                        return __WEBPACK_IMPORTED_MODULE_1__axiosClient__["a" /* default */].get('items/' + itemId + '/edit');
 
                     case 3:
                         return _context3.abrupt('return', _context3.sent);
@@ -6251,7 +6251,7 @@ var editItemById = function () {
                     case 0:
                         _context4.prev = 0;
                         _context4.next = 3;
-                        return __WEBPACK_IMPORTED_MODULE_1__axios__["a" /* default */].patch('items/' + itemId, item);
+                        return __WEBPACK_IMPORTED_MODULE_1__axiosClient__["a" /* default */].patch('items/' + itemId, item);
 
                     case 3:
                         return _context4.abrupt('return', _context4.sent);
@@ -6282,7 +6282,7 @@ var deleteItemById = function () {
                     case 0:
                         _context5.prev = 0;
                         _context5.next = 3;
-                        return __WEBPACK_IMPORTED_MODULE_1__axios__["a" /* default */].delete('items/' + itemId);
+                        return __WEBPACK_IMPORTED_MODULE_1__axiosClient__["a" /* default */].delete('items/' + itemId);
 
                     case 3:
                         return _context5.abrupt('return', _context5.sent);
@@ -61869,12 +61869,28 @@ if (hadRuntime) {
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
+var axiosClient = function axiosClient() {
+  var defaultOptions = {
     baseURL: __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* BASE_URL */],
     headers: {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     }
-}));
+  };
+
+  // Create instance
+  var instance = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create(defaultOptions);
+
+  // Set the AUTH token for any request
+  instance.interceptors.request.use(function (config) {
+    var token = localStorage.getItem('token');
+    config.headers.Authorization = token ? 'Bearer ' + token : '';
+    return config;
+  });
+
+  return instance;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (axiosClient());
 
 /***/ }),
 /* 302 */
